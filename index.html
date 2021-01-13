@@ -11,6 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <script>
+      const send = () => {
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let message = document.getElementById('message').value;
+        console.log(name, email, message);
+      };
+    </script>
   </head>
   <body class="is-preload">
     <!-- Page Wrapper -->
@@ -165,7 +173,7 @@
         <div class="inner">
           <h2 class="major">聯絡我們</h2>
           <p>請留下您的聯絡方式以便我們與您聯絡</p>
-          <form method="post" action="#">
+          <form>
             <div class="fields">
               <div class="field">
                 <label for="name">姓名</label>
@@ -181,18 +189,19 @@
               </div>
             </div>
             <ul class="actions">
-              <li><input type="submit" value="送出" /></li>
+              <li><button onClick="send()">送出</button></li>
+              <!-- <li><input type="submit" value="送出" onClick="submit()" /></li> -->
             </ul>
           </form>
+          <!-- <button onClick="send()">送出</button> -->
           <ul class="contact">
             <li class="icon solid fa-home">
-              這裡放地址<br />
-              1234 Somewhere Road Suite #2894<br />
-              Nashville, TN 00000-0000
+              台中市烏日區溪福路1巷110弄105-9號<br />
+              <!-- Nashville, TN 00000-0000 -->
             </li>
-            <li class="icon solid fa-phone">(000) 000-0000</li>
-            <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-            <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li>
+            <li class="icon solid fa-phone">(04) 2335 6118</li>
+            <li class="icon solid fa-envelope"><a href="#">GD42946182@gmail.com</a></li>
+            <!-- <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li> -->
           </ul>
           <ul class="copyright">
             <li>&copy; Untitled Inc. All rights reserved.</li>
