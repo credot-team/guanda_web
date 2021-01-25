@@ -8,15 +8,50 @@
   <head>
     <title>Guanda</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    <noscript
+      ><link rel="stylesheet" href="assets/css/noscript.css"
+    /></noscript>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
       const send = () => {
-        let name = document.getElementById('name').value;
-        let email = document.getElementById('email').value;
-        let message = document.getElementById('message').value;
-        console.log(name, email, message);
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+
+        if (name === "" || message === "") {
+          swal("輸入錯誤", "名稱或內容不可空白", "error");
+          return;
+        }
+        if (!validateEmail(email)) {
+          // swal("輸入錯誤", "請輸入正確的email", "error");
+          return;
+        }
+
+        axios
+          .post("/api/contacts", { name, email, message })
+          .then((response) => {
+            if (response.data && response.data.errorCode === 0) {
+              swal("送出成功", "我們將盡快與您聯絡", "success");
+            } else {
+              swal("發送失敗", response.data.errorMessage, "warning");
+            }
+          })
+          .catch((error) => {
+            swal("發送失敗", "請稍後再試", "error");
+          });
+      };
+
+      const validateEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
       };
     </script>
   </head>
@@ -62,7 +97,8 @@
             <div class="content">
               <h2 class="major">公司理念</h2>
               <p>
-                專為鋼結構產業而獨立研發，進而實現工業 4.0 及智能生產、提供自動化的產線
+                專為鋼結構產業而獨立研發，進而實現工業 4.0
+                及智能生產、提供自動化的產線
                 <br />
                 利用機械與人工一併數據化，將數據資料進行智能分析，可大幅協助用戶提升公司競爭力及未來趨勢。
               </p>
@@ -104,34 +140,49 @@
         <section id="five" class="wrapper alt style1">
           <div class="inner">
             <h2 class="major">產品連結示意</h2>
-            <p>在不久的將來公司也會推出新一代的鋼結構專用的加工機，不管任何機型都會與系統直接做連結運作</p>
+            <p>
+              在不久的將來公司也會推出新一代的鋼結構專用的加工機，不管任何機型都會與系統直接做連結運作
+            </p>
 
             <section>
               <div class="box alt">
                 <div class="row gtr-uniform">
                   <div class="col-12">
-                    <span class="image fit"><img src="images/link.png" alt="" /></span>
+                    <span class="image fit"
+                      ><img src="images/link.png" alt=""
+                    /></span>
                   </div>
                 </div>
               </div>
               <h4>Left &amp; Right</h4>
               <p>
-                <span class="image left"><img src="images/link.png" alt="" /></span>Morbi mattis mi consectetur tortor
-                elementum, varius pellentesque velit convallis. Aenean tincidunt lectus auctor mauris maximus, ac
-                scelerisque ipsum tempor. Duis vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis non
-                efficitur nisi, id malesuada justo. Maecenas sagittis felis ac sagittis semper. Curabitur purus leo,
-                tempus sed finibus eget, fringilla quis risus. Maecenas et lorem quis sem varius sagittis et a est.
-                Maecenas iaculis iaculis sem. Donec vel dolor at arcu tincidunt bibendum. Interdum et malesuada fames ac
-                ante ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer eget ultricies
-                odio. Nam vel ex a orci fringilla tincidunt. Aliquam eleifend ligula non velit accumsan cursus. Etiam ut
-                gravida sapien. Morbi mattis mi consectetur tortor elementum, varius pellentesque velit convallis.
-                Aenean tincidunt lectus auctor mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex et ex
-                tincidunt, quis lacinia velit aliquet. Duis non efficitur nisi, id malesuada justo. Maecenas sagittis
-                felis ac sagittis semper. Curabitur purus leo, tempus sed finibus eget, fringilla quis risus. Maecenas
-                et lorem quis sem varius sagittis et a est. Maecenas iaculis iaculis sem. Donec vel dolor at arcu
-                tincidunt bibendum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce ut aliquet
-                justo. Donec id neque ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla tincidunt. Aliquam
-                eleifend ligula non velit accumsan cursus. Etiam ut gravida sapien.
+                <span class="image left"
+                  ><img src="images/link.png" alt="" /></span
+                >Morbi mattis mi consectetur tortor elementum, varius
+                pellentesque velit convallis. Aenean tincidunt lectus auctor
+                mauris maximus, ac scelerisque ipsum tempor. Duis vulputate ex
+                et ex tincidunt, quis lacinia velit aliquet. Duis non efficitur
+                nisi, id malesuada justo. Maecenas sagittis felis ac sagittis
+                semper. Curabitur purus leo, tempus sed finibus eget, fringilla
+                quis risus. Maecenas et lorem quis sem varius sagittis et a est.
+                Maecenas iaculis iaculis sem. Donec vel dolor at arcu tincidunt
+                bibendum. Interdum et malesuada fames ac ante ipsum primis in
+                faucibus. Fusce ut aliquet justo. Donec id neque ipsum. Integer
+                eget ultricies odio. Nam vel ex a orci fringilla tincidunt.
+                Aliquam eleifend ligula non velit accumsan cursus. Etiam ut
+                gravida sapien. Morbi mattis mi consectetur tortor elementum,
+                varius pellentesque velit convallis. Aenean tincidunt lectus
+                auctor mauris maximus, ac scelerisque ipsum tempor. Duis
+                vulputate ex et ex tincidunt, quis lacinia velit aliquet. Duis
+                non efficitur nisi, id malesuada justo. Maecenas sagittis felis
+                ac sagittis semper. Curabitur purus leo, tempus sed finibus
+                eget, fringilla quis risus. Maecenas et lorem quis sem varius
+                sagittis et a est. Maecenas iaculis iaculis sem. Donec vel dolor
+                at arcu tincidunt bibendum. Interdum et malesuada fames ac ante
+                ipsum primis in faucibus. Fusce ut aliquet justo. Donec id neque
+                ipsum. Integer eget ultricies odio. Nam vel ex a orci fringilla
+                tincidunt. Aliquam eleifend ligula non velit accumsan cursus.
+                Etiam ut gravida sapien.
               </p>
             </section>
 
@@ -173,7 +224,7 @@
         <div class="inner">
           <h2 class="major">聯絡我們</h2>
           <p>請留下您的聯絡方式以便我們與您聯絡</p>
-          <form>
+          <form action="javascript:void(0);">
             <div class="fields">
               <div class="field">
                 <label for="name">姓名</label>
@@ -190,17 +241,18 @@
             </div>
             <ul class="actions">
               <li><button onClick="send()">送出</button></li>
-              <!-- <li><input type="submit" value="送出" onClick="submit()" /></li> -->
+              <!-- <li><input type="submit" value="送出" onClick="send()" /></li> -->
             </ul>
           </form>
-          <!-- <button onClick="send()">送出</button> -->
+
           <ul class="contact">
             <li class="icon solid fa-home">
               台中市烏日區溪福路1巷110弄105-9號<br />
-              <!-- Nashville, TN 00000-0000 -->
             </li>
             <li class="icon solid fa-phone">(04) 2335 6118</li>
-            <li class="icon solid fa-envelope"><a href="#">GD42946182@gmail.com</a></li>
+            <li class="icon solid fa-envelope">
+              <a>GD42946182@gmail.com</a>
+            </li>
             <!-- <li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li> -->
           </ul>
           <ul class="copyright">
