@@ -13,5 +13,5 @@ steps: #工作列表
       repo: registry.hub.docker.com/skynocover/guandaweb #打包完要上傳的docker repo名稱
       dockerfile: dockerfile #根據指定的Docker file打包image
       auto_tag: true #自動下tag
-      USERNAME: $hubname
-      PASSWORD: $hubsecret
+      username: skynocover
+      password: 1123581321
