@@ -1,4 +1,3 @@
-
 buildimg: 
 	docker build -t web .
 
