@@ -4,6 +4,8 @@ name: test #自定義pipleline名稱
 
 steps: #工作列表
   - name: build-nginx-image #自訂工作名稱
+    when:
+      event: tag
     pull: if-not-exists #要不要pull指定的image
     image: plugins/docker #指定要拿來執行command的image或者plugin
     settings:
@@ -13,5 +15,4 @@ steps: #工作列表
       auto_tag: true #自動下tag
       username: skynocover #dockerhub user name
       password: 1123581321 #dockerhub password
-    when:
-      event: tag
+
